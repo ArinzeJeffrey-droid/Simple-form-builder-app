@@ -3,6 +3,7 @@ const colors = {
   "gray-light": "#232323",
   "gray-lightest": "#2E2E2E",
   "gray-dark": "#161616",
+  "gray-form": "#212121",
   green: "#37996B",
   "green-light": "#28332E",
   "green-lightest": "#3ECF68",
