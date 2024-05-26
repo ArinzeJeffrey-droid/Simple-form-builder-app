@@ -21,6 +21,7 @@ type Props = {
   updateQuestion: (question: Question, position: number) => void;
   deleteQuestion: (position: number) => void;
   position: number;
+  existingQuestion: any;
   inputRef: (ref: HTMLDivElement | null) => void;
 };
 
@@ -35,6 +36,7 @@ const FormBuilder = ({
   addQuestion,
   deleteQuestion,
   updateQuestion,
+  existingQuestion,
   position,
   inputRef,
 }: Props) => {
@@ -42,7 +44,7 @@ const FormBuilder = ({
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState<string[]>([""]);
   const [isRequired, setIsRequired] = useState(false);
-  const questionRef = useRef<HTMLInputElement | null>(null);
+  const questionRef = useRef<HTMLInputElement | null>(null); // set focus on the question
 
   useEffect(() => {
     const fullQuestion = {
@@ -77,8 +79,8 @@ const FormBuilder = ({
 
   const SelectedFormElement = formElements[formType];
 
-  const isMultipleChoiceOrCheckboxes =
-    formType === "Multiple-choice" || formType === "Checkboxes";
+  const isMultipleChoiceOrCheckboxes = (type: keyof typeof formElements) =>
+    type === "Multiple-choice" || type === "Checkboxes";
 
   const saveQuestion = () => {
     const fullQuestion = {
@@ -87,6 +89,7 @@ const FormBuilder = ({
       isRequired,
       formType,
       options,
+      response: isMultipleChoiceOrCheckboxes(formType) ? [] : "",
     };
     addQuestion(fullQuestion, position);
   };
@@ -103,10 +106,11 @@ const FormBuilder = ({
           <FormTypeSelector
             formElements={formElements}
             handleChange={handleChange}
+            formType={formType}
           />
         </div>
         <div className="mt-5 flex items-center gap-4">
-          {isMultipleChoiceOrCheckboxes ? (
+          {isMultipleChoiceOrCheckboxes(formType) ? (
             <OptionsManager
               options={options}
               addOption={addOption}

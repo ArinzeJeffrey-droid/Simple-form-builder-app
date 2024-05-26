@@ -21,9 +21,11 @@ export type Props = React.PropsWithChildren<
 const BUTTON_CLASSES = {
   primary:
     "relative justify-center cursor-pointer items-center space-x-2 text-center font-regular ease-out duration-200 rounded-md hover:opacity-75 border bg-green border-green-lightest shadow-sm text-xs px-2.5 py-1 h-[26px] text-white lg:block",
+  danger:
+    "relative justify-center cursor-pointer items-center space-x-2 text-center font-regular ease-out duration-200 rounded-md hover:opacity-75 border bg-red-500 border-red-700 shadow-sm text-xs px-2.5 py-1 h-[26px] text-white lg:block",
   secondary:
     "relative justify-center cursor-pointer inline-flex items-center space-x-2 text-center font-regular ease-out duration-200 rounded-md transition-all bg-gray-lightest border border-gray-light text-white hover:opacity-75 shadow-sm text-sm px-4 py-2 h-[38px]",
-    icon: "bg-transparent text-white border-none p-0 m-0 text-inherit cursor-pointer",
+  icon: "bg-transparent text-white border-none p-0 m-0 text-inherit cursor-pointer",
 };
 function Button({ variant = "primary", ...props }: Props): React.ReactElement {
   const className = clsx(
